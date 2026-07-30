@@ -30,7 +30,7 @@ link "zprofile" ".zprofile"
 link "tmux.conf" ".tmux.conf"
 if command -v tmux >/dev/null 2>&1 && tmux list-sessions >/dev/null 2>&1; then
   echo "==> Reloading tmux config in the running server"
-  tmux source-file "$HOME/.tmux.conf"
+  tmux source-file "$HOME/.tmux.conf" || echo "==> tmux reload failed (non-fatal) - reload manually with prefix + r"
 fi
 # WezTerm checks ~/.config/wezterm/wezterm.lua before the legacy ~/.wezterm.lua -
 # link both so ours always wins regardless of which path a given machine resolves first.
@@ -40,11 +40,19 @@ link "wezterm.lua" ".config/wezterm/wezterm.lua"
 link "p10k.zsh" ".p10k.zsh"
 link "gitconfig" ".gitconfig"
 
-# AeroSpace checks ~/.aerospace.toml before ~/.config/aerospace/aerospace.toml -
-# a leftover file there would silently shadow the one we symlink below.
-if [ -e "$HOME/.aerospace.toml" ] && [ ! -L "$HOME/.aerospace.toml" ]; then
-  echo "==> Found ~/.aerospace.toml (takes priority over our config) - backing up to ~/.aerospace.toml.bak"
-  mv "$HOME/.aerospace.toml" "$HOME/.aerospace.toml.bak"
+# AeroSpace errors out ("Ambiguous config error") if both ~/.aerospace.toml and
+# ~/.config/aerospace/aerospace.toml exist, so - unlike WezTerm - we can't link
+# both. Only ~/.config/aerospace/aerospace.toml is managed here; clear out
+# anything at the legacy path first (backing up real files, just removing stale
+# symlinks).
+if [ -e "$HOME/.aerospace.toml" ] || [ -L "$HOME/.aerospace.toml" ]; then
+  if [ -L "$HOME/.aerospace.toml" ]; then
+    echo "==> Removing stale ~/.aerospace.toml symlink (legacy path - AeroSpace errors if both configs exist)"
+    rm "$HOME/.aerospace.toml"
+  else
+    echo "==> Found ~/.aerospace.toml (legacy path - AeroSpace errors if both configs exist) - backing up to ~/.aerospace.toml.bak"
+    mv "$HOME/.aerospace.toml" "$HOME/.aerospace.toml.bak"
+  fi
 fi
 link "aerospace.toml" ".config/aerospace/aerospace.toml"
 
@@ -56,7 +64,7 @@ fi
 if command -v aerospace >/dev/null 2>&1; then
   if pgrep -x AeroSpace >/dev/null 2>&1; then
     echo "==> Reloading AeroSpace config so the symlinked file takes effect now"
-    aerospace reload-config
+    aerospace reload-config || echo "==> AeroSpace reload failed (non-fatal) - reload manually or restart the app"
   else
     echo "==> Starting AeroSpace"
     open -a AeroSpace
