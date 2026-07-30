@@ -5,7 +5,7 @@ set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-TOTAL_STEPS=7
+TOTAL_STEPS=8
 step() {
   STEP_NUM=$((STEP_NUM + 1))
   echo
@@ -16,6 +16,18 @@ STEP_NUM=0
 if [ "$(uname)" != "Darwin" ]; then
   echo "This repo targets macOS only." >&2
   exit 1
+fi
+
+step "Xcode Command Line Tools"
+if ! xcode-select -p >/dev/null 2>&1; then
+  echo "==> Installing Xcode Command Line Tools - a system dialog will pop up, click Install"
+  xcode-select --install
+  until xcode-select -p >/dev/null 2>&1; do
+    sleep 5
+  done
+  echo "==> Xcode Command Line Tools installed"
+else
+  echo "==> Xcode Command Line Tools already installed, skipping"
 fi
 
 step "Homebrew"
