@@ -40,6 +40,9 @@ else
 fi
 
 step "Homebrew formulae and casks"
+echo "==> Trusting third-party taps referenced by the Brewfile (AeroSpace lives outside homebrew/cask)"
+brew tap nikitabobko/tap
+brew trust --tap nikitabobko/tap
 echo "==> brew bundle skips anything already installed; --verbose shows each package as it installs"
 brew bundle install --verbose --file=Brewfile
 
