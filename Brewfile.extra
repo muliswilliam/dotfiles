@@ -1,0 +1,16 @@
+# Large, occasionally-used tools - not installed by install.sh by default.
+# Install on demand with:
+#
+#   brew bundle install --no-upgrade --file=Brewfile.extra
+#
+# Split out of Brewfile because each of these pulls a genuinely large
+# download/build (a full Python-based CLI, an Erlang/Elixir toolchain, a
+# full emulator, or a large codec dependency tree), and not every machine
+# needs all of them.
+
+brew "azure-cli"
+brew "elixir"       # pulls in erlang
+brew "qemu"
+brew "ffmpeg"        # pulls in a large codec dependency tree (aom, dav1d, x264, x265, ...)
+brew "temporal"
+brew "k6"

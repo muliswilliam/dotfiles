@@ -35,7 +35,6 @@ alias pip="pip3"
 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 export PATH="$PATH:$(go env GOPATH)/bin"
-export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
 export PATH="/Users/william/.codeium/windsurf/bin:$PATH"
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm

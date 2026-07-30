@@ -1,9 +1,13 @@
-# Homebrew Bundle file. `brew bundle` is idempotent by default: it skips
-# anything already installed, so this file is safe to re-run on this machine
-# or run fresh on a new one.
+# Homebrew Bundle file - core, always-installed tools. `brew bundle` is
+# idempotent by default: it skips anything already installed, so this file
+# is safe to re-run on this machine or run fresh on a new one.
 #
-# Install everything:   brew bundle install --file=Brewfile
+# Install everything:   brew bundle install --no-upgrade --file=Brewfile
 # Check what's missing: brew bundle check --file=Brewfile --verbose
+#
+# Large, occasionally-used tools (azure-cli, elixir/erlang, qemu, ffmpeg,
+# temporal, k6) live in Brewfile.extra instead, so a fresh machine setup
+# doesn't pull them in by default. See README for how to install those.
 
 # --- Taps ---
 tap "homebrew/bundle"
@@ -28,24 +32,17 @@ brew "lazygit"
 brew "docker"
 brew "docker-compose"
 brew "podman"
-brew "qemu"
 
 # --- Languages / toolchains ---
-brew "node@20"
-brew "node@22"
 brew "go"
-brew "elixir"
-brew "python@3.12"
-brew "python@3.13"
+brew "python@3.14"
 
 # --- Cloud / backend tooling ---
-brew "azure-cli"
 brew "supabase"
 brew "golang-migrate"
 brew "goose"
 brew "golangci-lint"
 brew "libpq"
-brew "temporal"
 brew "mkcert"
 brew "cloudflared"
 
@@ -53,13 +50,11 @@ brew "cloudflared"
 brew "nmap"
 brew "iperf3"
 brew "speedtest-cli"
-brew "k6"
 
 # --- Misc dev utilities ---
 brew "cmake"
 brew "graphviz"
 brew "glow"               # markdown viewer in terminal
-brew "ffmpeg"
 
 # --- Fonts (needed for Powerlevel10k / Nerd Font terminal icons) ---
 cask "font-jetbrains-mono-nerd-font"

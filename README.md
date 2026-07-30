@@ -17,17 +17,20 @@ cd ~/projects/dotfiles
 
 This will, in order:
 
-1. Install Homebrew (skipped if already present).
-2. `brew bundle install --file=Brewfile` - installs every formula/cask below
-   (skipped per-item if already installed).
-3. Install nvm, an LTS Node, and enable pnpm/yarn via Corepack.
-4. Install oh-my-zsh, Powerlevel10k, and the zsh plugins referenced in
+1. Install Xcode Command Line Tools (skipped if already present; triggers a
+   system dialog - click Install - if not).
+2. Install Homebrew (skipped if already present).
+3. `brew bundle install --no-upgrade --file=Brewfile` - installs every
+   formula/cask below (skipped per-item if already installed; never upgrades
+   an already-installed one - see note below).
+4. Install nvm, an LTS Node, and enable pnpm/yarn via Corepack.
+5. Install oh-my-zsh, Powerlevel10k, and the zsh plugins referenced in
    `config/zshrc`.
-5. Install the tmux plugin manager (tpm).
-6. Install the Claude Code CLI.
-7. Symlink dotfiles from `config/` into `$HOME` (backing up any existing
+6. Install the tmux plugin manager (tpm).
+7. Install the Claude Code CLI.
+8. Symlink dotfiles from `config/` into `$HOME` (backing up any existing
    real file to `<name>.bak` first).
-8. Install VS Code extensions and copy `vscode/settings.json`, if the `code`
+9. Install VS Code extensions and copy `vscode/settings.json`, if the `code`
    CLI is on PATH.
 
 Each step also lives in its own script under `scripts/` if you want to
@@ -51,13 +54,21 @@ scripts to pick up anything new.
 
 ## What's installed
 
-**Brewfile** - CLI tools (git, gh, tmux, ripgrep, neovim, lazygit, docker,
-node, go, elixir, python, azure-cli, supabase, k6, ...), terminals (WezTerm,
+**Brewfile** (installed by default) - CLI tools (git, gh, tmux, ripgrep,
+neovim, lazygit, docker, go, python, supabase, ...), terminals (WezTerm,
 iTerm2, Warp, Ghostty), editors (VS Code), and apps (Claude Desktop, Docker
 Desktop, UTM, BetterDisplay, Postman, TablePlus, 1Password, Bitwarden,
 Brave, Microsoft Teams, Slack, Notion, Signal, Stats).
 
-**Not in Brewfile** (installed separately, see `scripts/`):
+**Brewfile.extra** (not installed by default - see below) - large,
+occasionally-used tools: azure-cli, elixir (+ erlang), qemu, ffmpeg (+ its
+codec dependency tree), temporal, k6. Install on demand with:
+
+```sh
+brew bundle install --no-upgrade --file=Brewfile.extra
+```
+
+**Not in either Brewfile** (installed separately, see `scripts/`):
 - Node/pnpm - via nvm + Corepack, not Homebrew's `node` formula, so version
   switching keeps working the way it already does on this machine.
 - Claude Code CLI - via the official installer script.
