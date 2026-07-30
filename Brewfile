@@ -10,7 +10,8 @@
 # doesn't pull them in by default. See README for how to install those.
 
 # --- Taps ---
-tap "homebrew/bundle"
+# No homebrew/bundle tap: that tap was deprecated and emptied, and `brew
+# bundle` is a built-in command now. Listing it made every run fail.
 tap "nikitabobko/tap"    # AeroSpace lives here, not in homebrew/cask
 
 # --- Core CLI tools ---
@@ -70,7 +71,7 @@ cask "visual-studio-code"
 cask "claude"             # Claude Desktop (Claude Code is installed via scripts/install-claude-code.sh)
 
 # --- Dev-adjacent apps ---
-cask "docker"             # Docker Desktop GUI (see note in README if this errors as "already installed")
+cask "docker-desktop"     # renamed upstream from "docker"; see note in README if this errors as "already installed"
 cask "utm"
 cask "betterdisplay"
 cask "postman"

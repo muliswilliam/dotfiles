@@ -147,7 +147,7 @@ the section comments and re-adding anything you deliberately removed.
 
 ## Known caveat
 
-A few casks (`docker`, `claude`, `utm`, `betterdisplay`) may already be
+A few casks (`docker-desktop`, `claude`, `utm`, `betterdisplay`) may already be
 installed manually (not via Homebrew) on a given machine. If `brew bundle`
 errors with "already installed", either delete the existing app first or
 adopt it with `brew install --cask <name> --force`.
