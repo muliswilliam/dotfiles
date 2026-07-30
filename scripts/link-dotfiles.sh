@@ -6,23 +6,27 @@ set -euo pipefail
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
 REPO_DIR="$(pwd)"
 
-link() {
-  local src="$REPO_DIR/config/$1" dest="$HOME/$2"
+link_path() {
+  local src="$1" dest="$2"
 
   if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
-    echo "==> ~/$2 already linked, skipping"
+    echo "==> ${dest#$HOME/} already linked, skipping"
     return
   fi
 
   mkdir -p "$(dirname "$dest")"
 
   if [ -e "$dest" ]; then
-    echo "==> Backing up existing ~/$2 to ~/$2.bak"
+    echo "==> Backing up existing ${dest#$HOME/} to ${dest#$HOME/}.bak"
     mv "$dest" "$dest.bak"
   fi
 
-  echo "==> Linking ~/$2 -> config/$1"
+  echo "==> Linking ${dest#$HOME/} -> $src"
   ln -s "$src" "$dest"
+}
+
+link() {
+  link_path "$REPO_DIR/config/$1" "$HOME/$2"
 }
 
 link "zshrc" ".zshrc"
@@ -39,6 +43,12 @@ link "wezterm.lua" ".wezterm.lua"
 link "wezterm.lua" ".config/wezterm/wezterm.lua"
 link "p10k.zsh" ".p10k.zsh"
 link "gitconfig" ".gitconfig"
+
+# AGENTS.md is the cross-tool source of truth for global agent instructions
+# (Claude Code, Codex CLI, Cursor, etc. all read it). ~/.claude/CLAUDE.md is
+# just a symlink to it so Claude Code picks up the same content.
+link "agents.md" "AGENTS.md"
+link_path "$HOME/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 
 # AeroSpace errors out ("Ambiguous config error") if both ~/.aerospace.toml and
 # ~/.config/aerospace/aerospace.toml exist, so - unlike WezTerm - we can't link

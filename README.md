@@ -96,6 +96,7 @@ each into `$HOME`:
 | `p10k.zsh` | `~/.p10k.zsh` | Powerlevel10k prompt config |
 | `gitconfig` | `~/.gitconfig` | git user/name and core settings |
 | `aerospace.toml` | `~/.config/aerospace/aerospace.toml` | AeroSpace tiling window manager config |
+| `agents.md` | `~/AGENTS.md` | Global agent instructions, read by Claude Code, Codex CLI, Cursor, and other AGENTS.md-aware tools. `~/.claude/CLAUDE.md` is symlinked to `~/AGENTS.md` in turn, so Claude Code shares the same source. |
 
 WezTerm is the only terminal installed and configured here.
 
