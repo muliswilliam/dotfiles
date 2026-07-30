@@ -1,8 +1,9 @@
 #!/usr/bin/env bash
 # Installs the Tmux Plugin Manager (TPM) and the plugins config/tmux.conf
-# declares (theme, resurrect, continuum, vim-tmux-navigator, ...).
-# Without actually running the plugins, tmux falls back to its plain
-# default status bar instead of the configured Kanagawa theme.
+# declares (resurrect, continuum, vim-tmux-navigator, yank).
+# The status bar theme is NOT one of them - config/tmux.conf sets it directly -
+# so a missing plugin here costs you session persistence and pane navigation,
+# not the colours.
 set -euo pipefail
 
 TPM_DIR="$HOME/.tmux/plugins/tpm"

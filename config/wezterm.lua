@@ -21,10 +21,40 @@ config.native_macos_fullscreen_mode = true -- play nicely with macOS Spaces/Miss
 config.window_background_opacity = 0.95
 config.macos_window_background_blur = 20
 
--- === Colors ===
--- Kanagawa (Gogh), to match the tmux-kanagawa status bar theme in ~/.tmux.conf
--- and any Kanagawa-themed editor, so terminal/multiplexer/editor look like one thing.
-config.color_scheme = "Kanagawa (Gogh)"
+-- === Colors: Synthwave Everything ===
+-- https://cmuxthemes.com/themes/synthwave-everything/
+--
+-- Defined inline rather than via config.color_scheme so the exact hexes live in
+-- one place and can be mirrored by the hand-rolled tmux status bar in
+-- ~/.tmux.conf -- terminal and multiplexer read as one surface.
+--
+-- The 16 ANSI slots are the real interface here: powerlevel10k's rainbow prompt
+-- and most CLI tools colour themselves by ANSI index, so these slots re-theme
+-- the prompt, ls, git, fzf and friends for free.
+--
+-- Two deliberate departures from the published palette, which ships slots 0 and
+-- 8 as #fefefe (it's a VS Code port, so the greyscale slots were never mapped):
+-- anything drawing dark-on-colour via `fg=0` renders white-on-mint or
+-- white-on-yellow and becomes unreadable -- p10k's rainbow prompt does exactly
+-- that on the git and command-duration segments. So slot 0 is a dark plum and
+-- slot 8 is #848bbd, Synthwave '84's own comment colour. All 14 other slots are
+-- verbatim, including the theme's signature quirk of a *pink* cyan slot with the
+-- real cyan parked in bright blue.
+config.colors = {
+	foreground = "#f0eff1",
+	background = "#2a2139",
+
+	cursor_bg = "#72f1b8", -- mint: the one colour the status bar never uses, so the caret always wins
+	cursor_border = "#72f1b8",
+	cursor_fg = "#2a2139",
+
+	selection_bg = "#463465",
+	selection_fg = "#f0eff1",
+
+	--        black      red        green      yellow     blue       magenta    cyan       white
+	ansi = { "#241b2f", "#f97e72", "#72f1b8", "#fede5d", "#6d77b3", "#c792ea", "#f772e0", "#fefefe" },
+	brights = { "#848bbd", "#f88414", "#72f1b8", "#fff951", "#36f9f6", "#e1acff", "#f92aad", "#fefefe" },
+}
 
 -- Previous custom scheme, kept here in case you want to switch back:
 -- config.colors = {
@@ -38,6 +68,8 @@ config.color_scheme = "Kanagawa (Gogh)"
 -- 	ansi = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#0FC5ED", "#a277ff", "#24EAF7", "#24EAF7" },
 -- 	brights = { "#214969", "#E52E2E", "#44FFB1", "#FFE073", "#A277FF", "#a277ff", "#24EAF7", "#24EAF7" },
 -- }
+-- Or the muted Kanagawa this replaced:
+-- config.color_scheme = "Kanagawa (Gogh)"
 
 -- === tmux integration (disabled for now) ===
 -- Auto-attaches every new WezTerm window/tab to a persistent "main" tmux

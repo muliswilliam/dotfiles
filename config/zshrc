@@ -26,6 +26,16 @@ source $ZSH/oh-my-zsh.sh
 # Load Powerlevel10k config
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
+# p10k's rainbow prompt colours itself by ANSI index (dir=blue, clean git=green,
+# dirty git=yellow), so it already inherits whatever palette the terminal sets --
+# see the Synthwave Everything block in config/wezterm.lua. The two exceptions are
+# the prompt symbol's ok/error colours, which the wizard hardcodes to 256-cube
+# 76/196 and which therefore ignore the palette. Point them at the ANSI slots
+# instead so the caret tracks the terminal theme too. Set here rather than in
+# p10k.zsh to keep that wizard-generated file untouched.
+typeset -g POWERLEVEL9K_PROMPT_CHAR_OK_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=2
+typeset -g POWERLEVEL9K_PROMPT_CHAR_ERROR_{VIINS,VICMD,VIVIS,VIOWR}_FOREGROUND=1
+
 # Completion system setup (IMPORTANT for autocomplete)
 # oh-my-zsh already runs compinit, so only run it here if it hasn't been.
 # Running it twice doubles startup cost and duplicates any fpath warnings.

@@ -91,7 +91,7 @@ each into `$HOME`:
 |---|---|---|
 | `zshrc` | `~/.zshrc` | oh-my-zsh + Powerlevel10k shell config |
 | `zprofile` | `~/.zprofile` | Homebrew shellenv |
-| `tmux.conf` | `~/.tmux.conf` | tmux config (prefix `C-a`, vi copy-mode, Kanagawa theme) |
+| `tmux.conf` | `~/.tmux.conf` | tmux config (prefix `C-a`, vi copy-mode, hand-rolled Synthwave Everything status bar) |
 | `wezterm.lua` | `~/.wezterm.lua` and `~/.config/wezterm/wezterm.lua` | WezTerm config - primary terminal. Linked to both paths since WezTerm checks the `~/.config` one first; a pre-existing file there would otherwise silently win over ours. |
 | `p10k.zsh` | `~/.p10k.zsh` | Powerlevel10k prompt config |
 | `gitconfig` | `~/.gitconfig` | git user/name and core settings |
