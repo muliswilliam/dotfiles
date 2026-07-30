@@ -53,10 +53,9 @@ scripts to pick up anything new.
 
 **Brewfile** - CLI tools (git, gh, tmux, ripgrep, neovim, lazygit, docker,
 node, go, elixir, python, azure-cli, supabase, k6, ...), terminals (WezTerm,
-iTerm2, Warp, Ghostty), editors/IDEs (VS Code, GoLand, IntelliJ IDEA CE,
-WebStorm), and apps (Claude Desktop, Docker Desktop, UTM, BetterDisplay,
-Postman, TablePlus, 1Password, Brave, Microsoft Teams, Slack, Notion,
-Signal, Stats).
+iTerm2, Warp, Ghostty), editors (VS Code), and apps (Claude Desktop, Docker
+Desktop, UTM, BetterDisplay, Postman, TablePlus, 1Password, Bitwarden,
+Brave, Microsoft Teams, Slack, Notion, Signal, Stats).
 
 **Not in Brewfile** (installed separately, see `scripts/`):
 - Node/pnpm - via nvm + Corepack, not Homebrew's `node` formula, so version

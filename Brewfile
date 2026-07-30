@@ -73,9 +73,6 @@ cask "ghostty"
 
 # --- Editors / IDEs ---
 cask "visual-studio-code"
-cask "goland"
-cask "intellij-idea-ce"
-cask "webstorm"
 
 # --- AI coding tools ---
 cask "claude"             # Claude Desktop (Claude Code is installed via scripts/install-claude-code.sh)
