@@ -61,7 +61,7 @@ export PATH=/Users/william/.opencode/bin:$PATH
 # Added by Antigravity
 export PATH="/Users/william/.antigravity/antigravity/bin:$PATH"
 
-. "/Users/william/.deno/env"
+[ -f "/Users/william/.deno/env" ] && . "/Users/william/.deno/env"
 
 # Machine-local secrets (API keys, tokens) - never committed. See zshrc.local.example.
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"
