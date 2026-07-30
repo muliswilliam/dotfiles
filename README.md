@@ -62,6 +62,15 @@ Brave, Microsoft Teams, Slack, Notion, Signal, Stats).
   switching keeps working the way it already does on this machine.
 - Claude Code CLI - via the official installer script.
 
+`brew bundle install` is called with `--no-upgrade`: it only installs what's
+missing and never silently upgrades an already-installed package. Without
+this flag, `brew bundle` upgrades any outdated formula/cask it finds in the
+Brewfile by default, which on a machine with a lot of history can mean
+dozens of unplanned upgrades (each a real download/build) before anything
+new actually shows up - looks like the script is stuck, but it's silently
+rebuilding things you didn't ask it to touch. Run `brew upgrade` yourself
+when you actually want that.
+
 ## Dotfiles
 
 `config/` holds the source of truth; `scripts/link-dotfiles.sh` symlinks

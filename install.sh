@@ -43,8 +43,8 @@ step "Homebrew formulae and casks"
 echo "==> Trusting third-party taps referenced by the Brewfile (AeroSpace lives outside homebrew/cask)"
 brew tap nikitabobko/tap
 brew trust --tap nikitabobko/tap
-echo "==> brew bundle skips anything already installed; --verbose shows each package as it installs"
-brew bundle install --verbose --file=Brewfile
+echo "==> --no-upgrade: install what's missing, never silently upgrade what's already there"
+brew bundle install --verbose --no-upgrade --file=Brewfile
 
 step "Node.js, nvm, pnpm/yarn"
 bash scripts/install-node.sh
