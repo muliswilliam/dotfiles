@@ -67,11 +67,7 @@ ctrl-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 ctrl-shift-semicolon = 'mode service'
 
 [[on-window-detected]]
-if.app-id = 'dev.warp.Warp-Stable'
-run = "move-node-to-workspace T"
-
-[[on-window-detected]]
-if.app-id = 'com.googlecode.iterm2'
+if.app-id = 'com.github.wez.wezterm'
 run = "move-node-to-workspace T"
 
 [[on-window-detected]]

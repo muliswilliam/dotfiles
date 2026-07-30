@@ -55,10 +55,10 @@ scripts to pick up anything new.
 ## What's installed
 
 **Brewfile** (installed by default) - CLI tools (git, gh, tmux, ripgrep,
-neovim, lazygit, docker, go, python, supabase, ...), terminals (WezTerm,
-iTerm2, Warp, Ghostty), editors (VS Code), and apps (Claude Desktop, Docker
-Desktop, UTM, BetterDisplay, Postman, TablePlus, 1Password, Bitwarden,
-Brave, Microsoft Teams, Slack, Notion, Signal, Stats).
+neovim, lazygit, docker, go, python, supabase, ...), the terminal (WezTerm),
+editors (VS Code), and apps (Claude Desktop, Docker Desktop, UTM,
+BetterDisplay, Postman, TablePlus, 1Password, Bitwarden, Brave, Microsoft
+Teams, Slack, Notion, Signal, Stats).
 
 **Brewfile.extra** (not installed by default - see below) - large,
 occasionally-used tools: azure-cli, elixir (+ erlang), qemu, ffmpeg (+ its
@@ -97,8 +97,7 @@ each into `$HOME`:
 | `gitconfig` | `~/.gitconfig` | git user/name and core settings |
 | `aerospace.toml` | `~/.config/aerospace/aerospace.toml` | AeroSpace tiling window manager config |
 
-iTerm2, Warp, and Ghostty are installed (see Brewfile) as alternates but
-their configs aren't tracked here yet - WezTerm is the primary terminal.
+WezTerm is the only terminal installed and configured here.
 
 ### Secrets
 

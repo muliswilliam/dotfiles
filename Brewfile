@@ -62,9 +62,6 @@ cask "font-meslo-lg-nerd-font"
 
 # --- Terminals ---
 cask "wezterm"            # primary terminal - see config/wezterm.lua
-cask "iterm2"
-cask "warp"
-cask "ghostty"
 
 # --- Editors / IDEs ---
 cask "visual-studio-code"
