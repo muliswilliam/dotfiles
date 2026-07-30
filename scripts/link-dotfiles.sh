@@ -28,7 +28,10 @@ link() {
 link "zshrc" ".zshrc"
 link "zprofile" ".zprofile"
 link "tmux.conf" ".tmux.conf"
+# WezTerm checks ~/.config/wezterm/wezterm.lua before the legacy ~/.wezterm.lua -
+# link both so ours always wins regardless of which path a given machine resolves first.
 link "wezterm.lua" ".wezterm.lua"
+link "wezterm.lua" ".config/wezterm/wezterm.lua"
 link "p10k.zsh" ".p10k.zsh"
 link "gitconfig" ".gitconfig"
 link "aerospace.toml" ".config/aerospace/aerospace.toml"
