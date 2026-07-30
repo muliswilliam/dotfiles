@@ -57,8 +57,8 @@ scripts to pick up anything new.
 **Brewfile** (installed by default) - CLI tools (git, gh, tmux, ripgrep,
 neovim, lazygit, docker, go, python, supabase, ...), the terminal (WezTerm),
 editors (VS Code), and apps (Claude Desktop, Docker Desktop, UTM,
-BetterDisplay, Postman, TablePlus, 1Password, Bitwarden, Brave, Microsoft
-Teams, Slack, Notion, Signal, Stats).
+BetterDisplay, Postman, TablePlus, 1Password, Bitwarden, ProtonVPN, Brave,
+Microsoft Teams, Slack, Notion, Signal, Stats).
 
 **Brewfile.extra** (not installed by default - see below) - large,
 occasionally-used tools: azure-cli, elixir (+ erlang), qemu, ffmpeg (+ its
