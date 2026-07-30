@@ -1,0 +1,74 @@
+{
+    "workbench.colorTheme": "Dark+",
+    "workbench.iconTheme": "vscode-icons",
+    "editor.formatOnSave": true,
+    "[typescript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "azdoPullRequests.orgUrl": "https://dev.azure.com/altn8",
+    "azdoPullRequests.projectName": "tija eProcurement",
+    "[typescriptreact]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "C_Cpp.intelliSenseEngine": "disabled",
+    "security.workspace.trust.untrustedFiles": "open",
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "redhat.telemetry.enabled": false,
+    "git.enableSmartCommit": true,
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "[json]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "python.defaultInterpreterPath": "/usr/bin/python3",
+    "typescript.updateImportsOnFileMove.enabled": "always",
+    "[go]": {
+        
+        "editor.insertSpaces": false,
+        "editor.formatOnSave": true,
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": "explicit"
+        }
+    },
+    "files.autoSave": "afterDelay",
+    "[html]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "git.confirmSync": false,
+    "docker.extension.enableComposeLanguageServer": false,
+    "pgsql.serverGroups": [
+        {
+            "name": "Servers",
+            "id": "E4A2AA7B-5133-4A71-8CC4-5916C059A099",
+            "isDefault": true
+        }
+    ],
+    "security.promptForLocalFileProtocolHandling": false,
+    "github.copilot.nextEditSuggestions.enabled": true,
+    "chat.agent.enabled": false,
+    "[dockercompose]": {
+        "editor.insertSpaces": true,
+        "editor.tabSize": 2,
+        "editor.autoIndent": "advanced",
+        "editor.quickSuggestions": {
+            "other": true,
+            "comments": false,
+            "strings": true
+        },
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "[github-actions-workflow]": {
+        "editor.defaultFormatter": "redhat.vscode-yaml"
+    },
+    "diffEditor.ignoreTrimWhitespace": false,
+    "json.schemaDownload.trustedDomains": {
+        "https://schemastore.azurewebsites.net/": true,
+        "https://raw.githubusercontent.com/": true,
+        "https://www.schemastore.org/": true,
+        "https://json.schemastore.org/": true,
+        "https://json-schema.org/": true,
+        "https://biomejs.dev": true
+    },
+    "claudeCode.preferredLocation": "panel"
+}

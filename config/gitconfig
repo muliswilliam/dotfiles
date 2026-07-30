@@ -1,0 +1,5 @@
+[user]
+	name = William Muli
+	email = willi.wambu@gmail.com
+[core]
+	autocrlf = input

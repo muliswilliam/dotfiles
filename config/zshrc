@@ -1,0 +1,68 @@
+# Add deno completions to search path
+if [[ ":$FPATH:" != *":/Users/william/.zsh/completions:"* ]]; then export FPATH="/Users/william/.zsh/completions:$FPATH"; fi
+# Enable Powerlevel10k instant prompt
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
+# If you come from bash you might have to change your $PATH
+export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH"
+
+# WezTerm CLI tools (wezterm, wezterm-mux-server, etc.)
+export PATH="$PATH:/Applications/WezTerm.app/Contents/MacOS"
+
+alias cc="claude --dangerously-skip-permissions"
+
+# Path to your Oh My Zsh installation
+export ZSH="$HOME/.oh-my-zsh"
+ZSH_THEME="powerlevel10k/powerlevel10k"
+
+# Plugins (make sure to include git, zsh-autosuggestions, zsh-completions)
+plugins=(git z zsh-autosuggestions zsh-completions)
+
+# Load Oh My Zsh
+source $ZSH/oh-my-zsh.sh
+
+# Load Powerlevel10k config
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+# Completion system setup (IMPORTANT for autocomplete)
+autoload -Uz compinit
+compinit
+
+alias python="python3"
+alias pip="pip3"
+
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+export PATH="$PATH:$(go env GOPATH)/bin"
+export PATH="/opt/homebrew/opt/node@20/bin:$PATH"
+export PATH="/Users/william/.codeium/windsurf/bin:$PATH"
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+
+# bun completions
+[ -s "/Users/william/.bun/_bun" ] && source "/Users/william/.bun/_bun"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="/Users/william/Library/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+# pnpm end
+
+# opencode
+export PATH=/Users/william/.opencode/bin:$PATH
+
+# Added by Antigravity
+export PATH="/Users/william/.antigravity/antigravity/bin:$PATH"
+
+. "/Users/william/.deno/env"
+
+# Machine-local secrets (API keys, tokens) - never committed. See zshrc.local.example.
+[ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"

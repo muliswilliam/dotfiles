@@ -1,0 +1,105 @@
+# dotfiles
+
+Scripts and configs to set up a new macOS dev machine end to end: install
+every CLI tool and app I use, then link my shell/terminal/editor configs.
+Everything here is idempotent - re-running `install.sh` on a machine that
+already has some (or all) of this installed just skips what's already there.
+
+## Usage
+
+On a fresh Mac:
+
+```sh
+git clone https://github.com/<your-github-username>/dotfiles.git ~/projects/dotfiles
+cd ~/projects/dotfiles
+./install.sh
+```
+
+This will, in order:
+
+1. Install Homebrew (skipped if already present).
+2. `brew bundle install --file=Brewfile` - installs every formula/cask below
+   (skipped per-item if already installed).
+3. Install nvm, an LTS Node, and enable pnpm/yarn via Corepack.
+4. Install oh-my-zsh, Powerlevel10k, and the zsh plugins referenced in
+   `config/zshrc`.
+5. Install the tmux plugin manager (tpm).
+6. Install the Claude Code CLI.
+7. Symlink dotfiles from `config/` into `$HOME` (backing up any existing
+   real file to `<name>.bak` first).
+8. Install VS Code extensions and copy `vscode/settings.json`, if the `code`
+   CLI is on PATH.
+
+Each step also lives in its own script under `scripts/` if you want to
+re-run just one of them.
+
+## What's installed
+
+**Brewfile** - CLI tools (git, gh, tmux, ripgrep, neovim, lazygit, docker,
+node, go, elixir, python, azure-cli, supabase, k6, ...), terminals (WezTerm,
+iTerm2, Warp, Ghostty), editors/IDEs (VS Code, GoLand, IntelliJ IDEA CE,
+WebStorm), and apps (Claude Desktop, Docker Desktop, UTM, BetterDisplay,
+Postman, TablePlus, 1Password, Brave, Microsoft Teams, Slack, Notion,
+Signal, Stats).
+
+**Not in Brewfile** (installed separately, see `scripts/`):
+- Node/pnpm - via nvm + Corepack, not Homebrew's `node` formula, so version
+  switching keeps working the way it already does on this machine.
+- Claude Code CLI - via the official installer script.
+
+## Dotfiles
+
+`config/` holds the source of truth; `scripts/link-dotfiles.sh` symlinks
+each into `$HOME`:
+
+| File | Links to | Purpose |
+|---|---|---|
+| `zshrc` | `~/.zshrc` | oh-my-zsh + Powerlevel10k shell config |
+| `zprofile` | `~/.zprofile` | Homebrew shellenv |
+| `tmux.conf` | `~/.tmux.conf` | tmux config (prefix `C-a`, vi copy-mode, Kanagawa theme) |
+| `wezterm.lua` | `~/.wezterm.lua` | WezTerm config - primary terminal |
+| `p10k.zsh` | `~/.p10k.zsh` | Powerlevel10k prompt config |
+| `gitconfig` | `~/.gitconfig` | git user/name and core settings |
+
+iTerm2, Warp, and Ghostty are installed (see Brewfile) as alternates but
+their configs aren't tracked here yet - WezTerm is the primary terminal.
+
+### Secrets
+
+`config/zshrc` sources `~/.zshrc.local` if it exists, which is gitignored
+and never committed. `config/zshrc.local.example` is the template -
+`link-dotfiles.sh` copies it to `~/.zshrc.local` on first run if that file
+doesn't already exist. Put API keys (Anthropic, Gemini, etc.) there, not in
+`config/zshrc`.
+
+## VS Code
+
+`vscode/extensions.txt` is the output of `code --list-extensions`;
+`vscode/settings.json` is a copy of `Code/User/settings.json`. Regenerate
+either with:
+
+```sh
+code --list-extensions > vscode/extensions.txt
+cp "$HOME/Library/Application Support/Code/User/settings.json" vscode/settings.json
+```
+
+`Code/User/mcp.json` is deliberately not tracked here since it can contain
+tokens.
+
+## Updating this repo from the current machine
+
+After changing a config or installing something new:
+
+```sh
+cp ~/.zshrc config/zshrc          # then re-remove any secrets before committing
+cp ~/.tmux.conf config/tmux.conf
+cp ~/.wezterm.lua config/wezterm.lua
+brew bundle dump --file=Brewfile --force   # regenerates Brewfile from what's installed
+```
+
+## Known caveat
+
+A few casks (`docker`, `claude`, `utm`, `betterdisplay`) may already be
+installed manually (not via Homebrew) on a given machine. If `brew bundle`
+errors with "already installed", either delete the existing app first or
+adopt it with `brew install --cask <name> --force`.

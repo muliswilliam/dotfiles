@@ -1,0 +1,6 @@
+# Copy this file to ~/.zshrc.local and fill in real values.
+# ~/.zshrc.local is gitignored - it is never committed, so it's safe to put
+# live API keys here. config/zshrc sources it automatically if it exists.
+
+export GEMINI_API_KEY="your-gemini-api-key"
+export ANTHROPIC_API_KEY="your-anthropic-api-key"
