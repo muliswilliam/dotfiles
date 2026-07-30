@@ -101,11 +101,18 @@ WezTerm is the only terminal installed and configured here.
 
 ### Secrets
 
-`config/zshrc` sources `~/.zshrc.local` if it exists, which is gitignored
-and never committed. `config/zshrc.local.example` is the template -
+`config/zshrc` sources `~/.zshrc.local` if it exists. That file lives in
+`$HOME`, outside this repo, so it is never committed;
+`.gitignore` also covers the name in case a copy ever lands in the repo by
+accident. `config/zshrc.local.example` is the template -
 `link-dotfiles.sh` copies it to `~/.zshrc.local` on first run if that file
 doesn't already exist. Put API keys (Anthropic, Gemini, etc.) there, not in
-`config/zshrc`.
+`config/zshrc`, and `chmod 600 ~/.zshrc.local`.
+
+The template ships its keys commented out on purpose. An exported placeholder
+(`ANTHROPIC_API_KEY="your-anthropic-api-key"`) is worse than an unset one -
+tools fail with a confusing auth error instead of cleanly reporting a missing
+key. Uncomment only what you actually have.
 
 ## VS Code
 
@@ -123,14 +130,20 @@ tokens.
 
 ## Updating this repo from the current machine
 
-After changing a config or installing something new:
+The config files in `$HOME` are symlinks into `config/`, so editing
+`~/.zshrc` *is* editing `config/zshrc` - there is nothing to copy back. Just
+edit and commit. (The old `cp ~/.zshrc config/zshrc` step was a self-copy, and
+its "re-remove any secrets before committing" caveat is what made it normal to
+have live keys sitting in the tracked file. Keys belong in `~/.zshrc.local`.)
+
+To refresh the Brewfile from what's actually installed:
 
 ```sh
-cp ~/.zshrc config/zshrc          # then re-remove any secrets before committing
-cp ~/.tmux.conf config/tmux.conf
-cp ~/.wezterm.lua config/wezterm.lua
-brew bundle dump --file=Brewfile --force   # regenerates Brewfile from what's installed
+brew bundle dump --file=Brewfile --force
 ```
+
+Review that diff before committing - `dump` rewrites the whole file, dropping
+the section comments and re-adding anything you deliberately removed.
 
 ## Known caveat
 

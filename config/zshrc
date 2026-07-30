@@ -68,4 +68,5 @@ export PATH="/Users/william/.antigravity/antigravity/bin:$PATH"
 [ -f "/Users/william/.deno/env" ] && . "/Users/william/.deno/env"
 
 # Machine-local secrets (API keys, tokens) - never committed. See zshrc.local.example.
+# Keep this the ONLY place secrets enter the shell; never hardcode them below.
 [ -f "$HOME/.zshrc.local" ] && source "$HOME/.zshrc.local"

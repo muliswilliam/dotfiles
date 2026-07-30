@@ -1,6 +1,12 @@
 # Copy this file to ~/.zshrc.local and fill in real values.
-# ~/.zshrc.local is gitignored - it is never committed, so it's safe to put
-# live API keys here. config/zshrc sources it automatically if it exists.
+# ~/.zshrc.local is never committed, so it's safe to put live API keys there.
+# config/zshrc sources it automatically if it exists.
+#
+# Keys are commented out on purpose. An exported placeholder is worse than an
+# unset variable - tools then fail with a confusing auth error instead of
+# cleanly reporting a missing key. Uncomment only what you actually have.
+#
+# After filling this in:  chmod 600 ~/.zshrc.local
 
-export GEMINI_API_KEY="your-gemini-api-key"
-export ANTHROPIC_API_KEY="your-anthropic-api-key"
+# export ANTHROPIC_API_KEY=""
+# export GEMINI_API_KEY=""

@@ -1,3 +1,9 @@
 .DS_Store
 *.bak
 .lavish/
+
+# Never commit real secrets, even if a copy lands inside the repo by accident.
+.zshrc.local
+zshrc.local
+config/zshrc.local
+*.local.bak.*
