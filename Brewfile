@@ -90,6 +90,7 @@ cask "db-browser-for-sqlite"
 cask "mitmproxy"
 cask "1password"
 cask "aerospace"
+cask "opensuperwhisper"  # voice dictation
 
 # --- Communication / productivity ---
 cask "brave-browser"
