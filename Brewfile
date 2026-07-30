@@ -90,6 +90,7 @@ cask "dbngin"
 cask "db-browser-for-sqlite"
 cask "mitmproxy"
 cask "1password"
+cask "bitwarden"
 cask "nikitabobko/tap/aerospace"
 cask "opensuperwhisper"  # voice dictation
 
