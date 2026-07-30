@@ -10,7 +10,7 @@ already has some (or all) of this installed just skips what's already there.
 On a fresh Mac:
 
 ```sh
-git clone https://github.com/<your-github-username>/dotfiles.git ~/projects/dotfiles
+git clone https://github.com/muliswilliam/dotfiles.git ~/projects/dotfiles
 cd ~/projects/dotfiles
 ./install.sh
 ```
