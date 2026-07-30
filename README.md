@@ -33,6 +33,22 @@ This will, in order:
 Each step also lives in its own script under `scripts/` if you want to
 re-run just one of them.
 
+## Keeping machines in sync
+
+When you fix or change something here, pull it onto every other machine with:
+
+```sh
+~/projects/dotfiles/update.sh
+```
+
+This does a `git pull --ff-only` then re-runs `install.sh`. Since every step
+is idempotent, this is safe to run anytime, on any machine - it only acts on
+whatever actually changed (a new Brewfile entry, a new script, an edited
+config), and no-ops on everything else. Config files under `config/` are
+symlinked into `$HOME`, so a `git pull` alone already updates their live
+content; `update.sh` additionally re-runs `brew bundle` and the install
+scripts to pick up anything new.
+
 ## What's installed
 
 **Brewfile** - CLI tools (git, gh, tmux, ripgrep, neovim, lazygit, docker,
