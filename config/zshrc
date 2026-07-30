@@ -27,8 +27,12 @@ source $ZSH/oh-my-zsh.sh
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
 # Completion system setup (IMPORTANT for autocomplete)
-autoload -Uz compinit
-compinit
+# oh-my-zsh already runs compinit, so only run it here if it hasn't been.
+# Running it twice doubles startup cost and duplicates any fpath warnings.
+if ! typeset -f compdef >/dev/null; then
+  autoload -Uz compinit
+  compinit
+fi
 
 alias python="python3"
 alias pip="pip3"
