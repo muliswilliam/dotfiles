@@ -7,6 +7,7 @@
 
 # --- Taps ---
 tap "homebrew/bundle"
+tap "nikitabobko/tap"    # AeroSpace lives here, not in homebrew/cask
 
 # --- Core CLI tools ---
 brew "coreutils"
@@ -89,7 +90,7 @@ cask "dbngin"
 cask "db-browser-for-sqlite"
 cask "mitmproxy"
 cask "1password"
-cask "aerospace"
+cask "nikitabobko/tap/aerospace"
 cask "opensuperwhisper"  # voice dictation
 
 # --- Communication / productivity ---

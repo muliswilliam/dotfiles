@@ -76,6 +76,7 @@ each into `$HOME`:
 | `wezterm.lua` | `~/.wezterm.lua` | WezTerm config - primary terminal |
 | `p10k.zsh` | `~/.p10k.zsh` | Powerlevel10k prompt config |
 | `gitconfig` | `~/.gitconfig` | git user/name and core settings |
+| `aerospace.toml` | `~/.config/aerospace/aerospace.toml` | AeroSpace tiling window manager config |
 
 iTerm2, Warp, and Ghostty are installed (see Brewfile) as alternates but
 their configs aren't tracked here yet - WezTerm is the primary terminal.

@@ -14,6 +14,8 @@ link() {
     return
   fi
 
+  mkdir -p "$(dirname "$dest")"
+
   if [ -e "$dest" ]; then
     echo "==> Backing up existing ~/$2 to ~/$2.bak"
     mv "$dest" "$dest.bak"
@@ -29,6 +31,7 @@ link "tmux.conf" ".tmux.conf"
 link "wezterm.lua" ".wezterm.lua"
 link "p10k.zsh" ".p10k.zsh"
 link "gitconfig" ".gitconfig"
+link "aerospace.toml" ".config/aerospace/aerospace.toml"
 
 if [ ! -f "$HOME/.zshrc.local" ]; then
   echo "==> Creating ~/.zshrc.local from template (fill in your real API keys)"
