@@ -7,7 +7,7 @@ local config = wezterm.config_builder()
 
 -- === Font ===
 config.font = wezterm.font("MesloLGS Nerd Font Mono")
-config.font_size = 15
+config.font_size = 14
 
 -- === Chrome ===
 -- tmux owns window/pane chrome (status bar, splits, tabs), so wezterm's own
@@ -87,25 +87,51 @@ config.colors = {
 -- (tmux's own `history-limit 50000` governs scrollback inside sessions).
 config.scrollback_lines = 10000
 
--- Leave WezTerm's own leader/pane keys untouched and don't bind CMD to
--- splits/panes: tmux (prefix C-a, `|`/`-` splits, vim-tmux-navigator for
--- Ctrl-hjkl movement) is the single source of truth for multiplexing, so
--- there's exactly one set of muscle memory to learn.
+-- tmux (prefix C-a, `|`/`-` splits, vim-tmux-navigator for Ctrl-hjkl) still
+-- owns multiplexing *within* a single session -- that muscle memory is
+-- untouched here. What WezTerm handles is a level up: tiling several
+-- already-running tmux sessions side by side in one window so they can all
+-- be watched at once. Splits/navigation below live on Cmd(+Alt) specifically
+-- because tmux never sees Cmd, so there's no ambiguity about which layer a
+-- keypress belongs to (bare Cmd+H/Cmd+M are skipped since macOS reserves
+-- those for Hide/Minimize).
 
 config.keys = {
 	-- Native macOS fullscreen toggle
 	{ key = "Enter", mods = "CMD", action = act.ToggleFullScreen },
+
+	-- Split the window to tile another tmux session alongside this one.
+	-- Same | / - mnemonic as tmux's own split bindings (vertical bar, horizontal
+	-- dash), just on Cmd instead of the tmux prefix.
+	{ key = "|", mods = "CMD|SHIFT", action = act.SplitPane({ direction = "Right", size = { Percent = 50 } }) },
+	{ key = "-", mods = "CMD", action = act.SplitPane({ direction = "Down", size = { Percent = 50 } }) },
+
+	-- Move focus between WezTerm panes (each its own tmux session).
+	{ key = "h", mods = "CMD|ALT", action = act.ActivatePaneDirection("Left") },
+	{ key = "l", mods = "CMD|ALT", action = act.ActivatePaneDirection("Right") },
+	{ key = "k", mods = "CMD|ALT", action = act.ActivatePaneDirection("Up") },
+	{ key = "j", mods = "CMD|ALT", action = act.ActivatePaneDirection("Down") },
 }
 
--- === Agent-attention notifications ===
--- Fires on any BEL (0x07), including ones tmux forwards from a background
--- window (see `bell-action any` in ~/.tmux.conf). Pops a native macOS
--- notification so you notice even when WezTerm isn't focused -- this is how
--- Claude Code/Codex CLI etc. can tell you they need input from inside a
--- tmux pane.
-wezterm.on("bell", function(window, pane)
-	window:toast_notification("Agent needs input", pane:get_title(), nil, 4000)
-end)
+-- tmux's `mouse on` (see ~/.tmux.conf) grabs plain clicks for pane
+-- selection/copy-mode, so WezTerm never gets a chance to open hyperlinks under
+-- the cursor. `mouse_reporting = true` makes this binding win over that grab
+-- for Cmd+click specifically, while leaving plain clicks going to tmux as before.
+config.mouse_bindings = {
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CMD",
+		action = act.OpenLinkAtMouseCursor,
+		mouse_reporting = true,
+	},
+}
+
+-- Agent-attention notifications (Claude Code/Codex CLI prompting for input
+-- from inside a tmux pane, including background sessions) are handled by a
+-- tmux `alert-bell` hook in ~/.tmux.conf, which fires a native macOS
+-- notification directly via osascript -- see scripts/tmux-bell-notify.sh.
+-- That covers sessions with no attached client, which BEL-forwarding to
+-- WezTerm's own bell event (the previous approach here) could not.
 
 -- and finally, return the configuration to wezterm
 return config
