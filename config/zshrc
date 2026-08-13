@@ -70,7 +70,7 @@ esac
 # pnpm end
 
 # opencode
-export PATH=/Users/william/.opencode/bin:$PATH
+export PATH="/Users/william/.opencode/bin:$PATH"
 
 # Added by Antigravity
 export PATH="/Users/william/.antigravity/antigravity/bin:$PATH"
