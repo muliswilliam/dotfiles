@@ -1,5 +1,9 @@
 # Add deno completions to search path
 if [[ ":$FPATH:" != *":/Users/william/.zsh/completions:"* ]]; then export FPATH="/Users/william/.zsh/completions:$FPATH"; fi
+# Homebrew ships zsh completions for many installed formulae (docker, git, gh,
+# podman, fd, ripgrep, golangci-lint, brew itself, ...) here, but never adds
+# this directory to FPATH on its own.
+if [[ ":$FPATH:" != *":/opt/homebrew/share/zsh/site-functions:"* ]]; then export FPATH="/opt/homebrew/share/zsh/site-functions:$FPATH"; fi
 # Enable Powerlevel10k instant prompt
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -18,7 +22,7 @@ export ZSH="$HOME/.oh-my-zsh"
 ZSH_THEME="powerlevel10k/powerlevel10k"
 
 # Plugins (make sure to include git, zsh-autosuggestions, zsh-completions)
-plugins=(git z zsh-autosuggestions zsh-completions)
+plugins=(git z zsh-autosuggestions zsh-completions docker docker-compose podman gh golang npm tmux)
 
 # Load Oh My Zsh
 source $ZSH/oh-my-zsh.sh
