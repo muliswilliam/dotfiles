@@ -48,6 +48,18 @@ if ! typeset -f compdef >/dev/null; then
   compinit
 fi
 
+# Tab accepts a visible zsh-autosuggestions suggestion (like the right arrow);
+# otherwise it falls back to normal completion.
+_tab_accept_suggestion_or_complete() {
+  if [[ -n "$POSTDISPLAY" ]]; then
+    zle autosuggest-accept
+  else
+    zle expand-or-complete
+  fi
+}
+zle -N _tab_accept_suggestion_or_complete
+bindkey '^I' _tab_accept_suggestion_or_complete
+
 alias python="python3"
 alias pip="pip3"
 
