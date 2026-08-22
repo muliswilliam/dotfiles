@@ -5,7 +5,7 @@ set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-TOTAL_STEPS=8
+TOTAL_STEPS=9
 step() {
   STEP_NUM=$((STEP_NUM + 1))
   echo
@@ -57,6 +57,9 @@ bash scripts/install-tmux-plugins.sh
 
 step "Claude Code CLI"
 bash scripts/install-claude-code.sh
+
+step "Claude Code plugins"
+bash scripts/install-claude-plugins.sh
 
 step "Symlinking dotfiles"
 bash scripts/link-dotfiles.sh

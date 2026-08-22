@@ -28,10 +28,11 @@ This will, in order:
    `config/zshrc`.
 6. Install the tmux plugin manager (tpm).
 7. Install the Claude Code CLI.
-8. Symlink dotfiles from `config/` into `$HOME` (backing up any existing
-   real file to `<name>.bak` first).
-9. Install VS Code extensions and copy `vscode/settings.json`, if the `code`
-   CLI is on PATH.
+8. Install Matt Pocock's `mattpocock-skills` Claude Code plugin.
+9. Symlink dotfiles from `config/` into `$HOME` (backing up any existing
+   real file to `<name>.bak` first), including the `bin/` scripts below.
+10. Install VS Code extensions and copy `vscode/settings.json`, if the `code`
+    CLI is on PATH.
 
 Each step also lives in its own script under `scripts/` if you want to
 re-run just one of them.
@@ -72,6 +73,12 @@ brew bundle install --no-upgrade --file=Brewfile.extra
 - Node/pnpm - via nvm + Corepack, not Homebrew's `node` formula, so version
   switching keeps working the way it already does on this machine.
 - Claude Code CLI - via the official installer script.
+- `mattpocock-skills` Claude Code plugin - via `claude plugin marketplace add`
+  and `claude plugin install` (see `scripts/install-claude-plugins.sh`).
+  [Matt Pocock's skills](https://github.com/mattpocock/skills) add commands
+  like `/grill-with-docs`, `/to-spec`, `/to-tickets`, `/implement`, `/tdd`,
+  and `/code-review`. Run `/setup-matt-pocock-skills` once inside each repo
+  you want to use them in.
 
 `brew bundle install` is called with `--no-upgrade`: it only installs what's
 missing and never silently upgrades an already-installed package. Without
@@ -99,6 +106,19 @@ each into `$HOME`:
 | `agents.md` | `~/AGENTS.md` | Global agent instructions, read by Claude Code, Codex CLI, Cursor, and other AGENTS.md-aware tools. `~/.claude/CLAUDE.md` is symlinked to `~/AGENTS.md` in turn, so Claude Code shares the same source. |
 
 WezTerm is the only terminal installed and configured here.
+
+### bin/
+
+`bin/` holds standalone CLI scripts; `scripts/link-dotfiles.sh` symlinks each
+into `~/bin` (already on `$PATH` via `config/zshrc`) without its `.sh` suffix:
+
+| Script | Linked as | Purpose |
+|---|---|---|
+| `ralph-once.sh` | `~/bin/ralph-once` | One supervised [Ralph loop](https://www.aihero.dev/getting-started-with-ralph) iteration: Claude reads `PRD.md`/`progress.txt` in the current directory, does the next task, commits. Run this by hand a few times in a project before trusting `afk-ralph`. |
+| `afk-ralph.sh` | `~/bin/afk-ralph` | Unattended Ralph loop: `afk-ralph <iterations>` repeats the same cycle in print mode, stopping early if Claude signals the PRD is complete. |
+
+Both expect `PRD.md` and `progress.txt` to already exist in the current
+project directory.
 
 ### Secrets
 

@@ -44,6 +44,11 @@ link "wezterm.lua" ".config/wezterm/wezterm.lua"
 link "p10k.zsh" ".p10k.zsh"
 link "gitconfig" ".gitconfig"
 
+# Ralph loop scripts (github.com/mattpocock skills setup) - symlinked without
+# the .sh suffix so they read as ordinary CLI commands on $PATH.
+link_path "$REPO_DIR/bin/ralph-once.sh" "$HOME/bin/ralph-once"
+link_path "$REPO_DIR/bin/afk-ralph.sh" "$HOME/bin/afk-ralph"
+
 # AGENTS.md is the cross-tool source of truth for global agent instructions
 # (Claude Code, Codex CLI, Cursor, etc. all read it). ~/.claude/CLAUDE.md is
 # just a symlink to it so Claude Code picks up the same content.
