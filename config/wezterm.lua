@@ -117,16 +117,39 @@ config.keys = {
 	{ key = "Enter", mods = "CMD|ALT", action = act.TogglePaneZoomState },
 }
 
--- tmux's `mouse on` (see ~/.tmux.conf) grabs plain clicks for pane
--- selection/copy-mode, so WezTerm never gets a chance to open hyperlinks under
--- the cursor. `mouse_reporting = true` makes this binding win over that grab
--- for Cmd+click specifically, while leaving plain clicks going to tmux as before.
+-- tmux's `mouse on` (see ~/.tmux.conf) puts the pane into "mouse reporting"
+-- mode, where a binding only fires if its `mouse_reporting` flag matches that
+-- state -- so Cmd+click needs two copies here (reporting off/on) to work both
+-- inside and outside tmux, and Down needs its own Nop so tmux doesn't act on
+-- a down-click that never gets a matching up-click.
+--
+-- Deliberately NOT adding CMD to `bypass_mouse_reporting_modifiers` (default
+-- SHIFT) to force this past tmux instead: WezTerm strips a bypass modifier
+-- from the click before matching mouse_bindings, so a bypass modifier that's
+-- also a binding's `mods` makes that binding stop matching entirely --
+-- https://github.com/wezterm/wezterm/issues/4536.
 config.mouse_bindings = {
+	{
+		event = { Down = { streak = 1, button = "Left" } },
+		mods = "CMD",
+		action = act.Nop,
+	},
+	{
+		event = { Down = { streak = 1, button = "Left" } },
+		mods = "CMD",
+		mouse_reporting = true,
+		action = act.Nop,
+	},
 	{
 		event = { Up = { streak = 1, button = "Left" } },
 		mods = "CMD",
 		action = act.OpenLinkAtMouseCursor,
+	},
+	{
+		event = { Up = { streak = 1, button = "Left" } },
+		mods = "CMD",
 		mouse_reporting = true,
+		action = act.OpenLinkAtMouseCursor,
 	},
 }
 
