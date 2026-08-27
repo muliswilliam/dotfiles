@@ -96,9 +96,46 @@ config.scrollback_lines = 10000
 -- keypress belongs to (bare Cmd+H/Cmd+M are skipped since macOS reserves
 -- those for Hide/Minimize).
 
+-- Cmd+C copy that's reliable with tmux's mouse mode on: dragging a selection
+-- inside tmux (see ~/.tmux.conf `mouse on`) puts the pane into copy-mode via
+-- raw mouse reporting rather than WezTerm's own selection, so WezTerm has
+-- nothing to copy and its default CopyTo(Clipboard) binding for Cmd+C is a
+-- no-op. Route through tmux instead by sending it F13, which ~/.tmux.conf
+-- binds to "copy the pending copy-mode selection and exit" -- safe to send
+-- unconditionally since it's a no-op outside copy-mode.
+--
+-- Checking only the foreground process name isn't enough to decide that,
+-- though: it's "tmux" any time tmux is the local pty's foreground process,
+-- regardless of what's running in the active pane. A plain shell doesn't
+-- request mouse reporting, so tmux captures the drag itself and enters
+-- copy-mode -- F13 is correct there. But a full-screen program with its own
+-- mouse reporting (vim, Claude Code) makes tmux forward the drag to it
+-- instead, so copy-mode is never entered and F13 would no-op; in that case
+-- WezTerm's native selection (made by holding the bypass modifier -- SHIFT by
+-- default -- while dragging, which skips mouse reporting entirely) is what
+-- actually has the text, so CopyTo(Clipboard) is what's needed. Query tmux's
+-- real copy-mode state to pick between the two rather than assuming it from
+-- the process name.
+local function copy_selection(window, pane)
+	local proc = pane:get_foreground_process_name() or ""
+	local in_tmux_copy_mode = false
+	if proc:find("tmux") then
+		local ok, stdout = wezterm.run_child_process({ "tmux", "display-message", "-p", "#{pane_in_mode}" })
+		in_tmux_copy_mode = ok and stdout:match("^1") ~= nil
+	end
+	if in_tmux_copy_mode then
+		window:perform_action(act.SendKey({ key = "F13" }), pane)
+	else
+		window:perform_action(act.CopyTo("Clipboard"), pane)
+	end
+end
+
 config.keys = {
 	-- Native macOS fullscreen toggle
 	{ key = "Enter", mods = "CMD", action = act.ToggleFullScreen },
+
+	-- Drag to select (tmux or native), then Cmd+C to copy -- see copy_selection above.
+	{ key = "c", mods = "CMD", action = wezterm.action_callback(copy_selection) },
 
 	-- Split the window to tile another tmux session alongside this one.
 	-- Same | / - mnemonic as tmux's own split bindings (vertical bar, horizontal
