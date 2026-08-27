@@ -71,6 +71,12 @@ if [ -e "$HOME/.aerospace.toml" ] || [ -L "$HOME/.aerospace.toml" ]; then
 fi
 link "aerospace.toml" ".config/aerospace/aerospace.toml"
 
+link "herdr.toml" ".config/herdr/config.toml"
+if command -v herdr >/dev/null 2>&1 && herdr status server >/dev/null 2>&1; then
+  echo "==> Reloading herdr config in the running server"
+  herdr server reload-config || echo "==> herdr reload failed (non-fatal) - reload manually with 'herdr server reload-config'"
+fi
+
 if [ ! -f "$HOME/.zshrc.local" ]; then
   echo "==> Creating ~/.zshrc.local from template (fill in your real API keys)"
   cp "$REPO_DIR/config/zshrc.local.example" "$HOME/.zshrc.local"
