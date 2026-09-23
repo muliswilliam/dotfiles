@@ -12,4 +12,6 @@
   If something clearly looks off, even if it is not directly related to what you are doing, try to get it fixed along the way.
 - Apply that same high standard to engineering excellence: lint, test failures, and test flakiness.
   If you see one, even if it is not caused by what you are working on right now, still get it fixed.
+- Always clean up processes you start (dev servers, backends, watchers, browser daemons, wait/poll loops, background jobs) before finishing your task, unless I explicitly ask to keep them running.
+  Kill the whole process tree, not just the parent, and verify ports are freed. If you leave something running on purpose, tell me what and why.
 - When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision.
