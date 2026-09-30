@@ -121,6 +121,15 @@ into `~/bin` (already on `$PATH` via `config/zshrc`) without its `.sh` suffix:
 Both expect `PRD.md` and `progress.txt` to already exist in the current
 project directory.
 
+### skills/
+
+Personal Claude Code skills; `scripts/link-dotfiles.sh` symlinks each
+`skills/<name>/` to `~/.claude/skills/<name>`:
+
+| Skill | Purpose |
+|---|---|
+| `review-loop` | `/review-loop [PR] [author-session]`: reviews a PR with `mattpocock-skills:code-review`, sends findings to the Claude session that owns the branch (auto-detected or asked) via cross-session messaging, and re-reviews every push until all findings are fixed or accepted and CI is green. A bundled Stop hook keeps the session looping like `/goal`. |
+
 ### Secrets
 
 `config/zshrc` sources `~/.zshrc.local` if it exists. That file lives in

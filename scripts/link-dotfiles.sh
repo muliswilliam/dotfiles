@@ -55,6 +55,12 @@ link_path "$REPO_DIR/bin/afk-ralph.sh" "$HOME/bin/afk-ralph"
 link "agents.md" "AGENTS.md"
 link_path "$HOME/AGENTS.md" "$HOME/.claude/CLAUDE.md"
 
+# Personal Claude Code skills: each skills/<name>/ dir becomes ~/.claude/skills/<name>.
+for skill in "$REPO_DIR"/skills/*/; do
+  skill="${skill%/}"
+  link_path "$skill" "$HOME/.claude/skills/$(basename "$skill")"
+done
+
 # AeroSpace errors out ("Ambiguous config error") if both ~/.aerospace.toml and
 # ~/.config/aerospace/aerospace.toml exist, so - unlike WezTerm - we can't link
 # both. Only ~/.config/aerospace/aerospace.toml is managed here; clear out
