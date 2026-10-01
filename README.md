@@ -104,7 +104,7 @@ each into `$HOME`:
 | `gitconfig` | `~/.gitconfig` | git user/name and core settings |
 | `aerospace.toml` | `~/.config/aerospace/aerospace.toml` | AeroSpace tiling window manager config |
 | `herdr.toml` | `~/.config/herdr/config.toml` | Herdr (terminal workspace manager for AI agents) config - prefix `ctrl+a` (AeroSpace owns bare `ctrl+<letter\|number>`), symbol status indicators, lazygit popup |
-| `agents.md` | `~/AGENTS.md` | Global agent instructions, read by Claude Code, Codex CLI, Cursor, and other AGENTS.md-aware tools. `~/.claude/CLAUDE.md` is symlinked to `~/AGENTS.md` in turn, so Claude Code shares the same source. |
+| `agents.md` | `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md` | Global agent instructions shared by Claude Code and Codex CLI. Deliberately not linked to `~/AGENTS.md`, since Claude Code would then load it twice (global + project instructions for anything under `~`). |
 
 WezTerm is the only terminal installed and configured here.
 

@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Symlinks config/* into $HOME. Any existing real file (not already our
-# symlink) is backed up once to <name>.bak before being replaced.
+# Symlinks config/* into $HOME. Any existing real file is backed up once to
+# <name>.bak before being replaced; stale symlinks are just replaced.
 set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")/.."
@@ -10,18 +10,21 @@ link_path() {
   local src="$1" dest="$2"
 
   if [ -L "$dest" ] && [ "$(readlink "$dest")" = "$src" ]; then
-    echo "==> ${dest#$HOME/} already linked, skipping"
+    echo "==> ${dest#"$HOME"/} already linked, skipping"
     return
   fi
 
   mkdir -p "$(dirname "$dest")"
 
-  if [ -e "$dest" ]; then
-    echo "==> Backing up existing ${dest#$HOME/} to ${dest#$HOME/}.bak"
+  if [ -L "$dest" ]; then
+    echo "==> Replacing stale symlink ${dest#"$HOME"/}"
+    rm "$dest"
+  elif [ -e "$dest" ]; then
+    echo "==> Backing up existing ${dest#"$HOME"/} to ${dest#"$HOME"/}.bak"
     mv "$dest" "$dest.bak"
   fi
 
-  echo "==> Linking ${dest#$HOME/} -> $src"
+  echo "==> Linking ${dest#"$HOME"/} -> $src"
   ln -s "$src" "$dest"
 }
 
@@ -49,11 +52,16 @@ link "gitconfig" ".gitconfig"
 link_path "$REPO_DIR/bin/ralph-once.sh" "$HOME/bin/ralph-once"
 link_path "$REPO_DIR/bin/afk-ralph.sh" "$HOME/bin/afk-ralph"
 
-# AGENTS.md is the cross-tool source of truth for global agent instructions
-# (Claude Code, Codex CLI, Cursor, etc. all read it). ~/.claude/CLAUDE.md is
-# just a symlink to it so Claude Code picks up the same content.
-link "agents.md" "AGENTS.md"
-link_path "$HOME/AGENTS.md" "$HOME/.claude/CLAUDE.md"
+# config/agents.md is the cross-tool source of truth for global agent
+# instructions, linked into each tool's global instructions path. Not linked to
+# ~/AGENTS.md: Claude Code also reads that as project instructions for anything
+# under $HOME, so it would load the same content twice.
+link "agents.md" ".claude/CLAUDE.md"
+link "agents.md" ".codex/AGENTS.md"
+if [ -L "$HOME/AGENTS.md" ] && [ "$(readlink "$HOME/AGENTS.md")" = "$REPO_DIR/config/agents.md" ]; then
+  echo "==> Removing legacy AGENTS.md link"
+  rm "$HOME/AGENTS.md"
+fi
 
 # Personal Claude Code skills: each skills/<name>/ dir becomes ~/.claude/skills/<name>.
 for skill in "$REPO_DIR"/skills/*/; do
