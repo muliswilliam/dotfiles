@@ -58,7 +58,7 @@ scripts to pick up anything new.
 
 **Brewfile** (installed by default) - CLI tools (git, gh, tmux, ripgrep,
 neovim, lazygit, docker, go, python, supabase, ...), the terminal (WezTerm),
-editors (VS Code), and apps (Claude Desktop, Docker Desktop, UTM,
+editors (VS Code), and apps (Claude Desktop, Podman Desktop,
 BetterDisplay, Postman, TablePlus, 1Password, Bitwarden, ProtonVPN, Brave,
 Microsoft Teams, Slack, Notion, Signal, Stats).
 
@@ -183,7 +183,7 @@ the section comments and re-adding anything you deliberately removed.
 
 ## Known caveat
 
-A few casks (`docker-desktop`, `claude`, `utm`, `betterdisplay`) may already be
+A few casks (`podman-desktop`, `claude`, `betterdisplay`) may already be
 installed manually (not via Homebrew) on a given machine. If `brew bundle`
 errors with "already installed", either delete the existing app first or
 adopt it with `brew install --cask <name> --force`.

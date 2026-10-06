@@ -71,8 +71,7 @@ cask "visual-studio-code"
 cask "claude"             # Claude Desktop (Claude Code is installed via scripts/install-claude-code.sh)
 
 # --- Dev-adjacent apps ---
-cask "docker-desktop"     # renamed upstream from "docker"; see note in README if this errors as "already installed"
-cask "utm"
+cask "podman-desktop"     # GUI for the podman engine above; replaces Docker Desktop
 cask "betterdisplay"
 cask "postman"
 cask "tableplus"
