@@ -28,7 +28,8 @@ This will, in order:
    `config/zshrc`.
 6. Install the tmux plugin manager (tpm).
 7. Install the Claude Code CLI.
-8. Install Matt Pocock's `mattpocock-skills` Claude Code plugin.
+8. Install Claude Code plugins: Matt Pocock's `mattpocock-skills` and
+   HumanLayer's `visual-pr`.
 9. Symlink dotfiles from `config/` into `$HOME` (backing up any existing
    real file to `<name>.bak` first), including the `bin/` scripts below.
 10. Install VS Code extensions and copy `vscode/settings.json`, if the `code`
@@ -79,6 +80,10 @@ brew bundle install --no-upgrade --file=Brewfile.extra
   like `/grill-with-docs`, `/to-spec`, `/to-tickets`, `/implement`, `/tdd`,
   and `/code-review`. Run `/setup-matt-pocock-skills` once inside each repo
   you want to use them in.
+- `visual-pr` Claude Code plugin - same mechanism, from
+  [HumanLayer's skills](https://github.com/humanlayer/skills) (Dex Horthy).
+  `/visual-pr` creates or updates the current branch's PR with a short
+  "why" plus a compact visual change outline (diffs, trees, call flows).
 
 `brew bundle install` is called with `--no-upgrade`: it only installs what's
 missing and never silently upgrades an already-installed package. Without
