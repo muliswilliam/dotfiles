@@ -12,11 +12,15 @@ else
   echo "==> nvm already installed, skipping"
 fi
 
+# --no-use: otherwise sourcing auto-activates the default alias (lts/*), and
+# exits non-zero - killing this script under set -e - whenever a newer LTS
+# release is known but not installed yet, which is exactly when we need to run.
 # shellcheck disable=SC1090
 export NVM_DIR
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --no-use
 
-if ! nvm ls --lts >/dev/null 2>&1 || [ -z "$(nvm ls --lts 2>/dev/null | grep -v 'N/A')" ]; then
+# nvm version resolves lts/* against installed versions only (N/A if missing).
+if [ "$(nvm version 'lts/*')" = "N/A" ]; then
   echo "==> Installing latest Node LTS"
   nvm install --lts
 else
