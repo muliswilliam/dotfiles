@@ -27,6 +27,7 @@ else
   echo "==> Node LTS already installed, skipping"
 fi
 nvm alias default lts/*
+nvm use default >/dev/null
 
 echo "==> Enabling Corepack (pnpm, yarn)"
 corepack enable
