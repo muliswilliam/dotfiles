@@ -29,7 +29,7 @@ This will, in order:
 6. Install the tmux plugin manager (tpm).
 7. Install the Claude Code CLI.
 8. Install Claude Code plugins: Matt Pocock's `mattpocock-skills` and
-   HumanLayer's `visual-pr`.
+   HumanLayer's `visual-pr`, plus Anthropic's `frontend-design` skill.
 9. Symlink dotfiles from `config/` into `$HOME` (backing up any existing
    real file to `<name>.bak` first), including the `bin/` scripts below.
 10. Install VS Code extensions and copy `vscode/settings.json`, if the `code`
@@ -84,6 +84,12 @@ brew bundle install --no-upgrade --file=Brewfile.extra
   [HumanLayer's skills](https://github.com/humanlayer/skills) (Dex Horthy).
   `/visual-pr` creates or updates the current branch's PR with a short
   "why" plus a compact visual change outline (diffs, trees, call flows).
+- `frontend-design` Claude Code skill - via `npx skills add` (same script),
+  from [Anthropic's skills](https://github.com/anthropics/skills). Steers UI
+  work toward distinctive, non-templated visual design.
+- Standalone copies of Matt Pocock's `code-review`, `to-spec`,
+  `implement-spec` and `grill-me` - same script, so they're invocable
+  unprefixed (`/code-review` rather than `/mattpocock-skills:code-review`).
 
 `brew bundle install` is called with `--no-upgrade`: it only installs what's
 missing and never silently upgrades an already-installed package. Without
