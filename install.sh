@@ -5,7 +5,7 @@ set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-TOTAL_STEPS=9
+TOTAL_STEPS=10
 step() {
   STEP_NUM=$((STEP_NUM + 1))
   echo
