@@ -1,3 +1,16 @@
+start-at-login = true
+
+# Laptop alone: accordion (one full window visible). G9 connected: tiles.
+exec-on-workspace-change = ['/bin/bash', '-c', 'if [ "$(/opt/homebrew/bin/aerospace list-monitors --count)" = 1 ]; then /opt/homebrew/bin/aerospace layout h_accordion; else /opt/homebrew/bin/aerospace layout h_tiles; fi']
+
+[gaps]
+inner.horizontal = 8
+inner.vertical = 8
+outer.top = 8
+outer.bottom = 8
+outer.left = [{ monitor."Odyssey" = 320 }, 8]
+outer.right = [{ monitor."Odyssey" = 320 }, 8]
+
 [mode.main.binding]
 
 # Layout
