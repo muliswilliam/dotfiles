@@ -18,5 +18,6 @@
 - When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision.
 - PRs that add or change UI must include screenshots of the affected screens (before/after when changing existing UI).
 - Non-trivial PRs must include a Mermaid diagram explaining the change and/or the affected product flow.
+- When you create a PR, you own it until review is clean: watch for review comments, address them, push fixes, and repeat until no unresolved comments remain.
 - While a review loop (review-loop / review agent) is running on a PR, do not wait for CI between rounds.
   Keep fixing review feedback as it arrives; check CI only once the review agent reports reviews are clean.
