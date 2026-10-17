@@ -5,7 +5,7 @@
 	autocrlf = input
 [credential "https://github.com"]
 	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !PATH=$PATH:/opt/homebrew/bin:$HOME/.local/share/mise/shims gh auth git-credential
 [credential "https://gist.github.com"]
 	helper = 
-	helper = !/opt/homebrew/bin/gh auth git-credential
+	helper = !PATH=$PATH:/opt/homebrew/bin:$HOME/.local/share/mise/shims gh auth git-credential
