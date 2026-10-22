@@ -7,11 +7,8 @@ onboarding = false
 # directory, each running an agent (usually Claude) directly in its pane.
 
 [keys]
-# AeroSpace (config/aerospace.toml) binds bare ctrl+<letter|number> globally
-# for workspace switching, so those combos never reach any terminal pane -
-# herdr's default "ctrl+b" prefix would be dead on arrival. ctrl+a is free at
-# the OS level and is already tmux's prefix (tmux.conf), so this keeps the
-# same muscle memory regardless of which multiplexer owns the focused pane.
+# ctrl+a is already tmux's prefix (tmux.conf), so this keeps the same muscle
+# memory regardless of which multiplexer owns the focused pane.
 prefix = "ctrl+a"
 
 # Toggle the sidebar. Already herdr's default binding, but pinned explicitly
