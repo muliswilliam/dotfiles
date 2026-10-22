@@ -66,6 +66,7 @@ cask "wezterm"            # primary terminal - see config/wezterm.lua
 
 # --- Editors / IDEs ---
 cask "visual-studio-code"
+cask "zed"
 
 # --- AI coding tools ---
 cask "claude"             # Claude Desktop (Claude Code is installed via scripts/install-claude-code.sh)

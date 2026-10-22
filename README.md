@@ -59,7 +59,7 @@ scripts to pick up anything new.
 
 **Brewfile** (installed by default) - CLI tools (git, gh, tmux, ripgrep,
 neovim, lazygit, docker, go, python, supabase, ...), the terminal (WezTerm),
-editors (VS Code), and apps (Claude Desktop, Podman Desktop,
+editors (VS Code, Zed), and apps (Claude Desktop, Podman Desktop,
 BetterDisplay, Postman, TablePlus, 1Password, Bitwarden, ProtonVPN, Wispr Flow,
 Zen, Microsoft Outlook, Microsoft Teams, Slack, Notion, Signal, Stats).
 
