@@ -91,6 +91,17 @@ if command -v herdr >/dev/null 2>&1 && herdr status server >/dev/null 2>&1; then
   herdr server reload-config || echo "==> herdr reload failed (non-fatal) - reload manually with 'herdr server reload-config'"
 fi
 
+# Zen's profile dir name is random per machine, so resolve the one the installed
+# app actually uses from profiles.ini ([Install<hash>] Default=). It only exists
+# after Zen's first launch. Zen reads user.js at startup - restart it to apply.
+ZEN_DIR="$HOME/Library/Application Support/zen"
+zen_profile="$(awk -F= '/^\[Install/ { in_install = 1; next } /^\[/ { in_install = 0 } in_install && $1 == "Default" { print $2; exit }' "$ZEN_DIR/profiles.ini" 2>/dev/null || true)"
+if [ -n "$zen_profile" ]; then
+  link_path "$REPO_DIR/config/zen-user.js" "$ZEN_DIR/$zen_profile/user.js"
+else
+  echo "==> Skipping Zen user.js: no Zen profile yet (launch Zen once, then re-run this script)"
+fi
+
 if [ ! -f "$HOME/.zshrc.local" ]; then
   echo "==> Creating ~/.zshrc.local from template (fill in your real API keys)"
   cp "$REPO_DIR/config/zshrc.local.example" "$HOME/.zshrc.local"

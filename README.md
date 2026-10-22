@@ -117,6 +117,7 @@ each into `$HOME`:
 | `gitconfig` | `~/.gitconfig` | git user/name and core settings |
 | `aerospace.toml` | `~/.config/aerospace/aerospace.toml` | AeroSpace tiling window manager config |
 | `herdr.toml` | `~/.config/herdr/config.toml` | Herdr (terminal workspace manager for AI agents) config - prefix `ctrl+a` (same as tmux), symbol status indicators, lazygit popup |
+| `zen-user.js` | `user.js` in Zen's default profile (`~/Library/Application Support/zen/Profiles/<random>/`) | Zen browser prefs - smaller padding around web content. Profile dir resolved from `profiles.ini`; skipped until Zen has launched once. Restart Zen to apply. |
 | `agents.md` | `~/.claude/CLAUDE.md` and `~/.codex/AGENTS.md` | Global agent instructions shared by Claude Code and Codex CLI. Deliberately not linked to `~/AGENTS.md`, since Claude Code would then load it twice (global + project instructions for anything under `~`). |
 
 WezTerm is the only terminal installed and configured here.
