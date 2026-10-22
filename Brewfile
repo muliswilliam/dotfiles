@@ -82,10 +82,11 @@ cask "1password"
 cask "bitwarden"
 cask "protonvpn"          # VPN client
 cask "nikitabobko/tap/aerospace"
-cask "opensuperwhisper"  # voice dictation
+cask "wispr-flow"        # voice dictation
 
 # --- Communication / productivity ---
-cask "brave-browser"
+cask "zen"               # default browser
+cask "microsoft-outlook"
 cask "microsoft-teams"
 cask "slack"
 cask "notion"
