@@ -74,6 +74,7 @@ cask "claude"             # Claude Desktop (Claude Code is installed via scripts
 # --- Dev-adjacent apps ---
 cask "podman-desktop"     # GUI for the podman engine above; replaces Docker Desktop
 cask "betterdisplay"
+cask "stats"              # menu bar CPU / GPU / RAM monitor
 cask "postman"
 cask "tableplus"
 cask "dbngin"
