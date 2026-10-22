@@ -30,9 +30,10 @@ This will, in order:
 7. Install the Claude Code CLI.
 8. Install Claude Code plugins: Matt Pocock's `mattpocock-skills` and
    HumanLayer's `visual-pr`, plus Anthropic's `frontend-design` skill.
-9. Symlink dotfiles from `config/` into `$HOME` (backing up any existing
-   real file to `<name>.bak` first), including the `bin/` scripts below.
-10. Install VS Code extensions and copy `vscode/settings.json`, if the `code`
+9. Install herdr (terminal workspace manager for AI agents).
+10. Symlink dotfiles from `config/` into `$HOME` (backing up any existing
+    real file to `<name>.bak` first), including the `bin/` scripts below.
+11. Install VS Code extensions and copy `vscode/settings.json`, if the `code`
     CLI is on PATH.
 
 Each step also lives in its own script under `scripts/` if you want to
@@ -74,6 +75,7 @@ brew bundle install --no-upgrade --file=Brewfile.extra
 - Node/pnpm - via nvm + Corepack, not Homebrew's `node` formula, so version
   switching keeps working the way it already does on this machine.
 - Claude Code CLI - via the official installer script.
+- herdr - via the official installer script (into `~/.local/bin`).
 - `mattpocock-skills` Claude Code plugin - via `claude plugin marketplace add`
   and `claude plugin install` (see `scripts/install-claude-plugins.sh`).
   [Matt Pocock's skills](https://github.com/mattpocock/skills) add commands

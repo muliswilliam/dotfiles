@@ -5,7 +5,7 @@ set -euo pipefail
 
 cd "$(dirname "${BASH_SOURCE[0]}")"
 
-TOTAL_STEPS=10
+TOTAL_STEPS=11
 step() {
   STEP_NUM=$((STEP_NUM + 1))
   echo
@@ -60,6 +60,9 @@ bash scripts/install-claude-code.sh
 
 step "Claude Code plugins"
 bash scripts/install-claude-plugins.sh
+
+step "herdr"
+bash scripts/install-herdr.sh
 
 step "Symlinking dotfiles"
 bash scripts/link-dotfiles.sh
