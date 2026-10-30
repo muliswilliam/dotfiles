@@ -67,6 +67,18 @@ cmd-shift-0 = 'move-node-to-workspace 0'
 ctrl-tab = 'workspace-back-and-forth'
 ctrl-shift-tab = 'move-workspace-to-monitor --wrap-around next'
 
+# App launchers (omarchy muscle memory; focuses the app if already running)
+cmd-shift-enter = 'exec-and-forget open -a Zen'
+cmd-shift-b = 'exec-and-forget open -a Zen'
+cmd-alt-enter = 'exec-and-forget /Applications/WezTerm.app/Contents/MacOS/wezterm start -- /opt/homebrew/bin/tmux new-session -A -s main'
+cmd-shift-n = 'exec-and-forget open -a Zed'
+cmd-shift-e = 'exec-and-forget open -a "Microsoft Outlook"'
+cmd-shift-c = 'exec-and-forget open -a "Microsoft Outlook"'
+cmd-shift-m = 'exec-and-forget open -a Spotify'
+cmd-shift-a = 'exec-and-forget open -a Claude'
+cmd-shift-d = 'exec-and-forget open -a "Podman Desktop"'
+cmd-shift-slash = 'exec-and-forget open -a 1Password'
+
 # Service mode
 ctrl-shift-semicolon = 'mode service'
 
